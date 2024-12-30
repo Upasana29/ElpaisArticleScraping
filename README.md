@@ -25,8 +25,8 @@ Clone this repository:
 
 bash
 Copy code
-git clone https://github.com/your-username/selenium-web-scraper.git
-cd selenium-web-scraper
+git clone https://github.com/your-username/ElpaisArticleScraping.git
+cd ElpaisArticleScraping
 Install dependencies:
 All dependencies are listed in requirements.txt. Install them using:
 bash
