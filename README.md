@@ -57,21 +57,21 @@ Example Output
 plaintext
 Copy code
 DataFrame of Editorials:
-                         headline  \
+headline
 0  Felipe VI: la exigencia del bien común   
 1                       El año de Sánchez   
 2                       Siria y los peros   
 3          El gobierno de los millonarios   
 4                Nochevieja adelantada    
 
-                                             content  \
+content
 0  La dana ocupó un lugar de privilegio en el dis...   
 1  En su ya clásica comparecencia de fin de año, ...   
 2  Es sabido que todo lo que va antes de un “pero...   
 3  Uno. Hace muchos años, a mediados del siglo XI...   
 4  El final de año siempre ha tenido una carga si...   
 
-                        image  
+image  
 0  article_images/cover_1.jpg  
 1  article_images/cover_2.jpg  
 2  article_images/cover_3.jpg  
