@@ -1,6 +1,4 @@
-#!/usr/bin/env python
-# coding: utf-8
-# import os
+import os
 import requests
 import pandas as pd
 from selenium import webdriver
@@ -21,7 +19,40 @@ translator = Translator()
 # Create a directory for saving images
 os.makedirs("article_images", exist_ok=True)
 
-# Define a function to scrape articles
+def save_image(img_element, index):
+    """
+    Save the image to a local file.
+    Args:
+        img_element: Selenium WebElement of the <img> tag.
+        index: Article index (used for naming the image).
+    Returns:
+        str: Local file path if successful, else None.
+    """
+    try:
+        # Extract the highest resolution URL from srcset if available
+        img_url = img_element.get_attribute("srcset")
+        if img_url:
+            img_url = img_url.split(",")[-1].split(" ")[0]  # Select the highest resolution
+        else:
+            img_url = img_element.get_attribute("src")  # Fallback to src
+
+        print(f"Downloading image for Editorial {index}: {img_url}")
+
+        # Fetch the image
+        img_response = requests.get(img_url)
+        img_response.raise_for_status()
+
+        # Save the image as is
+        img_path = os.path.join("article_images", f"cover_{index}.jpg")
+        with open(img_path, "wb") as img_file:
+            img_file.write(img_response.content)
+
+        print(f"Saved image for Editorial {index} at {img_path}")
+        return img_path
+    except Exception as e:
+        print(f"Failed to save image for Editorial {index}: {e}")
+        return None
+
 def scrape_articles():
     driver = webdriver.Chrome(options=options)
     driver.maximize_window()
@@ -69,22 +100,10 @@ def scrape_articles():
 
                 # Wait for the new page to load and fetch the cover image and content
                 WebDriverWait(driver, 10).until(
-                    EC.presence_of_element_located((By.TAG_NAME, "img"))
-                )
-                img_element = driver.find_element(By.TAG_NAME, "img")
-                img_url = img_element.get_attribute("src")
-
-                img_path = None
-                if img_url:
-                    try:
-                        img_response = requests.get(img_url)
-                        img_response.raise_for_status()
-                        img_path = os.path.join("article_images", f"cover_{index + 1}.jpg")
-                        with open(img_path, "wb") as img_file:
-                            img_file.write(img_response.content)
-                        print(f"Saved cover image for Editorial {index + 1} at {img_path}")
-                    except Exception as e:
-                        print(f"Failed to save cover image for Editorial {index + 1}: {e}")
+                    EC.presence_of_element_located((By.XPATH, "//img[contains(@class, 'a_m-h')]")
+                ))
+                img_element = driver.find_element(By.XPATH, "//img[contains(@class, 'a_m-h')]")
+                img_path = save_image(img_element, index + 1)
 
                 # Fetch article content
                 paragraphs = driver.find_elements(By.TAG_NAME, "p")
@@ -105,7 +124,6 @@ def scrape_articles():
     driver.quit()
     return articles_data
 
-# Function to translate headers and analyze them
 def translate_and_analyze(articles):
     translated_headers = []
     word_count = {}
@@ -116,7 +134,7 @@ def translate_and_analyze(articles):
         
         # Count words in the translated title
         for word in translated_title.split():
-            word = word.lower().strip(".,!?\")")
+            word = word.lower().strip(".,!?")
             word_count[word] = word_count.get(word, 0) + 1
 
     # Identify repeated words
@@ -149,15 +167,3 @@ if __name__ == "__main__":
             print(f"{word}: {count}")
     else:
         print("No articles found. DataFrame is empty.")
-
-# In[10]:
-
-
-df
-
-
-# In[ ]:
-
-
-
-
