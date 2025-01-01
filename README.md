@@ -105,17 +105,3 @@ The script performs the following:
 
 ---
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-1
