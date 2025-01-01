@@ -23,77 +23,99 @@ Install required Python libraries using requirements.txt.
 Installation
 Clone this repository:
 
-bash
-Copy code
-git clone https://github.com/your-username/ElpaisArticleScraping.git
-cd ElpaisArticleScraping
-Install dependencies:
-All dependencies are listed in requirements.txt. Install them using:
-bash
-Copy code
-pip install -r requirements.txt
-Place the chromedriver executable in your system's PATH or the project directory.
+# Web Scraping and Cross-Browser Testing with BrowserStack
+
+This project demonstrates web scraping, API integration, text processing, and cross-browser testing using Selenium. Below is a breakdown of the tasks completed and their implementation.
+
+## Overview
+The script performs the following:
+
+1. **Web Scraping:**
+   - Scrape articles from the Opinion section of the El País website.
+   - Extract the title, content, and cover image of the first five articles.
+
+2. **API Integration:**
+   - Use a translation API to translate article titles from Spanish to English.
+
+3. **Text Analysis:**
+   - Identify words that are repeated more than twice across all translated titles.
+
+4. **Cross-Browser Testing:**
+   - Validate functionality locally.
+   - Run tests on BrowserStack across 5 parallel threads on a combination of desktop and mobile browsers.
+
+---
+
+## Setup
+### Prerequisites
+- Python 3.8+
+- Selenium WebDriver
+- BrowserStack account
+- API key for the chosen translation API (e.g., Google Translate API)
+- Required Python packages (install using `requirements.txt`):
+  ```plaintext
+  selenium
+  requests
+  googletrans==4.0.0-rc1  # Example for Google Translate
+  ````
+
+### Installation
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/Upasana29/ElpaisArticleScraping.git
+   cd ElpaisArticleScraping
+   ```
+2. Install dependencies:
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+3. Set up the environment variables for:
+   - Translation API Key
+   - BrowserStack username and access key
+
+---
+
+## Implementation
+### Web Scraping
+1. **Target Website:** El País (https://elpais.com).
+2. **Steps:**
+   - Navigate to the Opinion section.
+   - Scrape the first five articles for:
+     - Titles
+     - Content
+     - Cover images (saved locally).
+
+### Translation
+1. **API Used:** (e.g., Google Translate API or Rapid Translate Multi Traduction API).
+2. **Steps:**
+   - Send titles to the API for translation.
+   - Print translated titles in English.
+
+### Text Analysis
+1. Combine all translated titles.
+2. Count occurrences of each word across the titles.
+3. Identify and print words repeated more than twice, along with their counts.
+
+### Cross-Browser Testing
+1. Run the script locally to verify functionality.
+2. Execute the solution on BrowserStack with:
+   - 5 parallel threads.
+   - Various combinations of desktop and mobile browsers.
+
+---
 
 
 
-Usage
-Run the script to scrape articles from El País:
 
-bash
-Copy code
-python elpaisArticleScraping.py
-Output
-DataFrame: The script prints a DataFrame with the following columns:
-headline: Article headline in Spanish.
-content: Full content of the article.
-image: Local path to the saved cover image.
-Translated Titles: Translations of the Spanish headlines into English.
-Repeated Words: Words that occur more than twice in the translated titles.
 
-Cover Images
-Cover images are saved in the article_images/ directory.
 
-Example Output
-plaintext
-Copy code
-DataFrame of Editorials:
-headline
-0  Felipe VI: la exigencia del bien común   
-1                       El año de Sánchez   
-2                       Siria y los peros   
-3          El gobierno de los millonarios   
-4                Nochevieja adelantada    
 
-content
-0  La dana ocupó un lugar de privilegio en el dis...   
-1  En su ya clásica comparecencia de fin de año, ...   
-2  Es sabido que todo lo que va antes de un “pero...   
-3  Uno. Hace muchos años, a mediados del siglo XI...   
-4  El final de año siempre ha tenido una carga si...   
 
-image  
-0  article_images/cover_1.jpg  
-1  article_images/cover_2.jpg  
-2  article_images/cover_3.jpg  
-3  article_images/cover_4.jpg  
-4  article_images/cover_5.jpg  
 
-Translated Titles:
-Felipe VI: The demand of the common good
-Sánchez's year
-Syria and Peros
-The Government of the Millionaires
-New Year's Eve advance
 
-Repeated Words:
-the: 4
-of: 3
 
-## Project Structure
 
-```plaintext
-selenium-web-scraper/
-├── article_images/        # Directory for storing downloaded images
-├── elpaisArticleScraping.py     # Main Python script
-├── README.md              # Documentation for the project
-└── requirements.txt       # Dependencies for the project
+
+
+1
