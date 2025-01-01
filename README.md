@@ -105,7 +105,8 @@ The script performs the following:
 
 ---
 ### PDF Report
-This report is showing the cross browser testing of application using BrowserStack.
+
+- This report is showing the cross browser testing of application using BrowserStack.
 ---
 ### Note
 In this repository, I have uploaded two scripts:
