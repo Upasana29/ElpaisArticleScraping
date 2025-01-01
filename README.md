@@ -104,4 +104,20 @@ The script performs the following:
    - Various combinations of desktop and mobile browsers.
 
 ---
+### PDF Report
+This report is showing the cross browser testing of application using BrowserStack.
+---
+### Note
+In this repository, I have uploaded two scripts:
+
+elpaisArticleScraping.py:
+
+- This is a Python script that I tested locally on my machine, and it produces the desired output.
+- You can refer to the requirements.txt file to install the necessary dependencies.
+- The article_images folder is used to save cover page images locally.
+
+BrowserStackScripts:
+
+- This folder contains scripts used to run the tests on BrowserStack using the BrowserStack SDK.
+- For better guidance and understanding, you can refer to the BrowserStack Selenium Documentation.
 
